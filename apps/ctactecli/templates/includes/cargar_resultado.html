@@ -1,0 +1,17 @@
+{% load humanize %}
+
+{% for object in dataset %}
+<tr>
+    <td>{{object.Fecha}}</td>
+    <td>{{object.TipoComprob}} {{object.Letra}} {{object.Terminal|stringformat:"04d"}}-{{object.Numero|stringformat:"08d"}}</td>
+    <td>{{object.Importe|intcomma}}</td>
+    <td>
+        {% if forloop.last %}
+            <b>{{object.Saldo|intcomma}}</b>
+        {% else %}
+            {{object.Saldo|intcomma}}
+        {% endif %}
+    </td>
+    <td>{{object.Dias}}</td>
+</tr>
+{% endfor %}

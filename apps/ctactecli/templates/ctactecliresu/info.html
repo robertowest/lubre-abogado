@@ -1,0 +1,88 @@
+{% extends "layout/base-detail.html" %}
+{% load static %}
+
+{% block breadcrumbs %}
+    <a class="nav-wrapper" href="{% url 'tercero:come_listado' %}">Comerciales</a>
+    <a class="active">Detalle</a>
+{% endblock %}
+
+{% block left-panel %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                {% if not object.active %}*** {% endif %}
+                {{object}}
+                {% if not object.active %}(eliminado){% endif %}
+            </div>
+            <table class="table bordered">
+                <tr><th>Documento</th><td>{{object.documento}}</td></tr>
+            </table>
+        </div>
+        <div class="card-action">
+            <div class="right-align">
+                {% if object.active %}
+                <a class="waves-effect waves-light btn red white-text" href="{{object.get_delete_url}}">Eliminar</a>
+                {% endif %}
+                <a class="waves-effect waves-light btn white-text" href="{{object.get_update_url}}">Modificar</a>
+            </div>
+        </div>
+    </div>
+
+    {# información de tablas relacionadas #}
+
+    {% if domicilios  %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">Domicilios</div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Domicilio</td>
+                        <td>Localidad</td>
+                        <td>Ciudad</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in domicilios %}
+                    <tr>
+                        <td><a href="{{contacto.get_absolute_url}}">{{registro}}</a></td>
+                        <td>{{registro.localidad}}</td>
+                        <td>{{registro.ciudad}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-action right-align">
+            <a href="{% url 'comunes:domi_nuevo' %}" class="btn">Agregar</a>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if comunicaciones  %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">Canales de Comunicación</div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Tipo</td>
+                        <td>Descripción</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in comunicaciones %}
+                    <tr>
+                        <td>{{registro.get_tipo_display}}</td>
+                        <td><a href="{{contacto.get_absolute_url}}">{{registro.texto}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-action right-align">
+            <a href="{% url 'comunes:comu_nuevo' %}" class="btn">Agregar</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

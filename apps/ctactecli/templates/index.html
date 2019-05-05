@@ -1,0 +1,81 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table" id="tableResult">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Comprobante</th>
+                        <th>Importe</th>
+                        <th>Saldo</th>
+                        <th>Días</th>
+                    </tr>
+                </thead>
+                <tbody name="dataset">
+                    {% include 'includes/cargar_resultado.html' %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3" style="background-color: #e9ecef;">
+            {% include 'formulario.html' %}
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock content %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        let urlPath = '{% url 'ctactecli:cargar_vendedores_ajax' %}';
+        $.ajax({
+            url: urlPath,
+            success: function(response) {
+                $('#vendedorSelect').html(response);
+            }
+        });
+        event.preventDefault();
+    });
+
+    $('#vendedorSelect').change(function() {
+        let urlPath = '{% url 'ctactecli:cargar_clientes_ajax' %}';
+        let ufId = $(this).val();
+
+        $.ajax({
+            url: urlPath,
+            data: {uf: ufId},
+            success: function(response) {
+                $('#clienteSelect').html(response);
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        })
+        event.preventDefault();
+    });
+
+    $(document).on('click', '.result', function(event) {
+        let urlPath = '{% url 'ctactecli:cargar_resultado_ajax' %}';
+        let ufId = $('#clienteSelect').val();
+
+        $.ajax({
+            url: urlPath,
+            data: {uf: ufId},
+            success: function(response) {
+                $("#tableResult tbody").empty();
+                $('#tableResult tbody').append(response);
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        event.preventDefault();
+    });
+</script>
+{% endblock js %}

@@ -1,0 +1,5 @@
+django
+django-firebird
+fdb
+django-filter
+django-widget-tweaks
