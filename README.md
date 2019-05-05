@@ -1,2 +1,2 @@
 # lubre-abogado
-en desarrollo ...
+aplicación para un cliente determinado, no sirve como ejemplo público
