@@ -5,15 +5,30 @@
 
 {% block css %}
     <style>
-        body {padding-top: 5.5rem;}
+        body {padding-top: 4.5rem;}
         .jumbotron {padding: 2rem 2rem;}
+
+        @media (min-width: 992px) {
+          <div class="row2"></div> {
+            /* Setup Flexbox */
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            /* Reverse Column Order */
+            -webkit-flex-flow: column-reverse;
+            flex-flow: column-reverse;
+          }
+        }
     </style>
 {% endblock css %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
+    <!-- <div class="container"></div> -->
+
+    <div class="row" style="margin-left: 10px; margin-right: 10px;">
+        <div class="col col-sm-12 col-md-9 col-lg-10">
             <table class="table" id="tableResult">
                 <thead>
                     <tr>
@@ -29,11 +44,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-3" style="background-color: #e9ecef;">
+        <div class="col col-sm-12 col-md-3 col-lg-2" style="padding: 10px; background-color: #e9ecef;">
             {% include 'ctactecliresu/formulario.html' %}
         </div>
     </div>
-</div>
+
 <hr>
 {% endblock content %}
 
@@ -41,10 +56,14 @@
 <script>
     $(document).ready(function() {
         let urlPath = '{% url 'ctactecli:cargar_vendedores_ajax' %}';
+
         $.ajax({
             url: urlPath,
             success: function(response) {
                 $('#vendedorSelect').html(response);
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
             }
         });
         event.preventDefault();
