@@ -8,32 +8,27 @@
         <meta name="author" content="Roberto West">
         <meta name="description" content="">
 
-        <title>{% block title %}Lubre SRL{% endblock %}</title>
+        <title>Cuentas</title>
 
-        <!-- Bootstrap core CSS -->
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap4/css/bootstrap.min.css' %}">
+        <!-- Font-awesome -->
+        <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/font-awesome.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'dataTables/dataTables.bootstrap4.min.css' %}">
-
-        <!-- Custom styles for this template -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
-
-        <!-- Cargar Iconos -->
+        <link rel="stylesheet" type="text/css" href="{% static 'twitter-bootstrap/bootstrap.css' %}">
+        <!-- Bootstrap Glyph Icons -->
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css' %}">
-        <style>
-            body {
-            padding-top: 3.5rem;
-            }
-        </style>
+
+        {% block css %}
+        {% endblock css %}
     </head>
     <body>
-        {% include "layout/jumbotron/navbar.html" %}
+
 
         <!-- contenido -->
         <main role="main">
-            <div class="container">
-                {% block content %}
-                {% endblock %}
-            </div>
+            {% block content %}
+            {% endblock %}
         </main>
 
         <!-- Optional JavaScript -->
@@ -42,7 +37,8 @@
         <script src="{% static 'js/popper.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'dataTables/jquery.dataTables.min.js' %}"></script>
+
         {% block js %}
-        {% endblock %}
+        {% endblock js %}
     </body>
 </html>
