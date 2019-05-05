@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CtaCteCliDeudaConfig(AppConfig):
+class CtactecliConfig(AppConfig):
     name = 'ctactecli'

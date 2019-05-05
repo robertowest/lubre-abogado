@@ -19,8 +19,9 @@ urlpatterns = [
     path('register/', views.register, name='register'),
 
     # aplicaciones
-    path('', views.home, name='home'),
-    path('ctactecli/', include('apps.ctactecli.urls')),
+    # path('', views.home, name='home'),
+    # path('ctactecli/', include('apps.ctactecli.urls')),
+    path('', include('apps.ctactecli.urls')),
 ]
 
 
