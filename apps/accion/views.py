@@ -12,7 +12,7 @@ class AccionListView(ListView):
     template_name = 'accion/listado.html'
 
     def get_queryset(self):
-        return models.Accion.objects.filter(idenc_mov=self.kwargs['filter'])
+        return models.Accion.objects.filter(idenc_mov=self.kwargs['filter']).order_by('fecha')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,8 +30,7 @@ class AccionNewView(CreateView):
     form_class = forms.AccionForm
 
     def get_initial(self):
-        initial = super().get_initial()
-        initial['idenc_mov'] = self.kwargs['filter']
+        return {'idenc_mov': self.kwargs['filter']}
 
 
 class AccionUpdateView(UpdateView):
@@ -43,29 +42,6 @@ class AccionUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['previous_url'] = self.request.META.get('HTTP_REFERER')
         return context
-
-    """
-    def form_valid(self, form):
-        import pdb; pdb.set_trace()
-
-        # self.kwargs['filter']
-        # form.data['idenc_mov']
-
-        post = form.save(commit=False)
-        post.idenc_mov = self.kwargs['filter']
-        post.save()
-        return redirect('accion:listado', filter=post.idenc_mov)
-    """
-
-    def form_valid(self, form):
-        import pdb;
-        pdb.set_trace()
-
-        self.object.groups.clear()
-        self.object.idenc_mov = self.kwargs['filter']
-        return super().form_valid(form)
-
-
 
 
 class AccionDeleteView(DeleteView):

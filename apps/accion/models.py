@@ -14,13 +14,13 @@ class Accion(models.Model):
         return self.id
 
     def get_absolute_url(self):
-        return reverse('accion:modif', args=(self.pk,))
+        return reverse('accion:listado', args=(self.idenc_mov,))
 
     def get_update_url(self):
-        return reverse('accion:modif', args=(self.pk,))
+        return reverse('accion:modif', args=(self.idenc_mov, self.pk,))
 
     def get_delete_url(self):
-        return reverse('accion:borrar', args=(self.pk,))
+        return reverse('accion:borrar', args=(self.idenc_mov, self.pk,))
 
     class Meta:
         verbose_name = 'Accion'
