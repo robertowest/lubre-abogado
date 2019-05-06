@@ -9,7 +9,7 @@ class Accion(models.Model):
     tipo = models.CharField(max_length=5, choices=TIPO, default='001')
     observacion = models.TextField()
     idenc_mov = models.IntegerField(null=True, blank=True)      # ctactecliresu.idenc_mov
-
+    
     def __str__(self):
         return self.id
 

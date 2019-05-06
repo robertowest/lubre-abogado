@@ -1,7 +1,8 @@
 from datetime import datetime
 from django import forms
 
-from . import models
+from apps.ctactecli.models import accion as models
+
 
 class AccionForm(forms.ModelForm):
     fecha = forms.DateField(initial=datetime.now())

@@ -22,7 +22,6 @@ urlpatterns = [
     # path('', views.home, name='home'),
     # path('ctactecli/', include('apps.ctactecli.urls')),
     path('', include('apps.ctactecli.urls')),
-    path('', include('apps.accion.urls')),
 ]
 
 

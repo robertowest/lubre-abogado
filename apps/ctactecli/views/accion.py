@@ -1,9 +1,7 @@
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from . import forms
-from . import models
+from apps.ctactecli import forms
+from apps.ctactecli.models import accion as models
 
 paginacion = 50
 
@@ -46,56 +44,3 @@ class AccionUpdateView(UpdateView):
 
 class AccionDeleteView(DeleteView):
     pass
-
-
-"""
-class AccionListView(ListView):
-    model = forms.Accion
-    template_name = 'accion/listado.html'
-    paginate_by = paginacion
-
-    def get_active(self, **kwargs):
-        return self.filter(active=True)
-
-    def get_queryset(self):
-        queryset = models.Accion.objects.all()  # filter(pk=self.kwargs['pk'])
-        return queryset
-
-
-class AccionNewView(CreateView):
-    model = models.Accion
-    template_name = 'accion/formulario.html'
-    form_class = forms.AccionForm
-
-
-class AccionDetailView(DetailView):
-    model = models.Accion
-    template_name = 'accion/info.html'
-
-    def post(self, request, *args, **kwargs):
-        # comprobamos de dónde viene el post
-        if request.path.find('info'):
-            object = self.model.objects.get(pk=self.kwargs['pk'])
-            object.delete()
-
-        return redirect('accion:listado')
-
-
-class AccionUpdateView(UpdateView):
-    model = models.Accion
-    template_name = 'accion/formulario.html'
-    form_class = forms.AccionForm
-
-
-class AccionDeleteView(DeleteView):
-    model = models.Accion
-    # template_name = 'accion/confirmar_borrado.html'
-    # success_url = reverse_lazy('accion:listado')
-
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse_lazy('accion:listado')
-"""
-

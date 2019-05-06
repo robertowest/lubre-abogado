@@ -31,11 +31,11 @@
                             <td>{{object.get_tipo_display}}</td>
                             <td>{{object.observacion}}</td>
                             <td>
-                                <a href="{% url 'accion:modif' filter object.id %}" class="text-primary">
+                                <a href="{% url 'ctactecli:accion_modif' filter object.id %}" class="text-primary">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 &nbsp;
-                                <a href="{% url 'accion:borrar' filter object.id %}" class="text-danger">
+                                <a href="{% url 'ctactecli:accion_borrar' filter object.id %}" class="text-danger">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
@@ -45,7 +45,7 @@
                 </table>
             </div>
             <div class="col-md-1">
-                <a class="btn btn-primary" href="{% url 'accion:nuevo' filter %}">
+                <a class="btn btn-primary" href="{% url 'ctactecli:accion_nuevo' filter %}">
                     Nueva acción
                 </a>
             </div>

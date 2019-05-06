@@ -171,7 +171,6 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "static/sent_emails")
 
 INSTALLED_APPS += [
     'apps.ctactecli',
-    'apps.accion',
 ]
 
 

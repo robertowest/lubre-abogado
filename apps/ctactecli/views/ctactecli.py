@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 
-from apps.ctactecli import models
+from apps.ctactecli.models import ctactecli as models
 
 
 def index(request):
@@ -32,16 +32,8 @@ def cargar_resultado_ajax(request):
     return render(request, 'ctactecliresu/include/cargar_resultado.html', context)
 
 
+"""
 def info(request, filter):
     from django.urls import reverse
-    return reverse('accion:deuda/'+str(filter))
-
-
-"""
-# from django.apps import apps
-
-from mainapp.models import mainappmodel
-def currentappview(request):
-    all = mainappmodel.objects.all()
-    return render(request, "pages/home.html", {'all': all})
+    return reverse('ctactecli:accion_deuda/'+str(filter))
 """
