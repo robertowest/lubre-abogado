@@ -82,9 +82,15 @@ DATABASES = {
     },
     'firebird': {
         'ENGINE': 'django.db.backends.firebird',
-        # 'NAME': 'P:\PROYECTO\datos\Gestion.fdb',
-        # 'HOST': '192.168.1.254',
-        # 'PORT': '3050',
+        'NAME': 'P:\PROYECTO\datos\Gestion.fdb',
+        'USER': 'SYSDBA',
+        'PASSWORD': 'masterkey',
+        'HOST': '192.168.1.254',
+        'PORT': '3050',
+        'OPTIONS': {'charset': 'ISO8859_1'}
+    },
+    'firebird-rw': {
+        'ENGINE': 'django.db.backends.firebird',
         'NAME': '/databases/gestion.fdb',
         'USER': 'SYSDBA',
         'PASSWORD': 'masterkey',
@@ -95,7 +101,7 @@ DATABASES = {
 }
 
 # DATABASE_ROUTERS = ['app.settings.DbRouter']
-DATABASE_ROUTERS = ['config.routers.DbRouter', 'apps.ctactecli.routers.DbRouter']
+DATABASE_ROUTERS = ['config.routers.DefaultRouter', 'config.routers.CtactecliRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -165,4 +171,26 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "static/sent_emails")
 
 INSTALLED_APPS += [
     'apps.ctactecli',
+    'apps.accion',
 ]
+
+
+
+
+# configuración debug-toolbar
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
+    INTERNAL_IPS = ['localhost', '127.0.0.1', '192.168.1.10']  # gateway del docker
+# fin configuración debug-toolbar
+
+
+# crispy_forms
+INSTALLED_APPS += ['crispy_forms',]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

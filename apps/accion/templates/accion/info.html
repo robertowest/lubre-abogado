@@ -1,0 +1,40 @@
+{% extends "layout/base-detail.html" %}
+{% load static %}
+
+{% block breadcrumbs %}
+    <a class="nav-wrapper" href="{% url 'persona:listado' %}">Personas</a>
+    <a class="active">Detalle</a>
+{% endblock %}
+
+{% block left-panel %}
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                {% if not object.active %}*** {% endif %}
+                {{object}}
+                {% if not object.active %}(eliminado){% endif %}
+            </div>
+            <table class="table bordered">
+                <tr><th>Documento</th><td>{{object.documento}}</td></tr>
+            </table>
+        </div>
+        <div class="card-action">
+            <div class="right-align">
+                {% if object.active %}
+                <!--
+                este boton utiliza DeleteView el otro utiliza accion con formulario modal
+                <a class="waves-effect waves-light btn red white-text" href="{{object.get_delete_url}}">Eliminar</a>
+                -->
+                <a class="waves-effect waves-light btn red white-text modal-trigger" href="#modal1">Eliminar</a>
+                {% endif %}
+                <a class="waves-effect waves-light btn white-text" href="{{object.get_update_url}}">Modificar</a>
+            </div>
+        </div>
+    </div>
+
+    {# confirmación de eliminación #}
+    <div id="modal1" class="modal">
+        {% include "persona/confirmar_borrado.html" %}
+    </div>
+
+{% endblock %}

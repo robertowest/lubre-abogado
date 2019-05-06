@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+    <style>
+        body {padding-top: 4.5rem;}
+        .jumbotron {padding: 2rem 2rem;}
+    </style>
+{% endblock css %}
+
+# https://simpleisbetterthancomplex.com/tutorial/2018/08/13/how-to-use-bootstrap-4-forms-with-django.html
+
+{% block content %}
+    <div class="container col-md-4">
+        <form method="POST">
+            {% csrf_token %}
+            {# form|crispy #}
+
+            <div class="row">
+                <div class="col-6">
+                    {{ form.fecha|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.tipo|as_crispy_field }}
+                </div>
+            </div>
+            {{ form.observacion|as_crispy_field }}
+            {{ form.idenc_mov|as_crispy_field }}
+
+            <div class="pull-right">
+                <a href="{{previous_url}}" class="btn btn-outline-secondary" role="button">Cancela</a>
+                <button type="submit" class="save btn btn-success">Graba</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

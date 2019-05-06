@@ -14,7 +14,7 @@ urlpatterns = [
          auth_views.PasswordResetView.as_view(template_name='users/reset_pass.html'), 
          name='reset_password'),    
 
-    # agregamos acciones propias
+    # agregamos accion propias
     path('profile/', views.profile, name='profile'),
     path('register/', views.register, name='register'),
 
@@ -22,6 +22,7 @@ urlpatterns = [
     # path('', views.home, name='home'),
     # path('ctactecli/', include('apps.ctactecli.urls')),
     path('', include('apps.ctactecli.urls')),
+    path('', include('apps.accion.urls')),
 ]
 
 

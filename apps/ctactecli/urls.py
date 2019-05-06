@@ -8,4 +8,5 @@ urlpatterns = [
     path('vendedores/ajax/', views.cargar_vendedores_ajax, name='cargar_vendedores_ajax'),
     path('clientes/ajax/', views.cargar_clientes_ajax, name='cargar_clientes_ajax'),
     path('resultado/ajax/', views.cargar_resultado_ajax, name='cargar_resultado_ajax'),
+    path('ctactecli/<int:filter>', views.info, name='info'),
 ]

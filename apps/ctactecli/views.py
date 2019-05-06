@@ -30,3 +30,18 @@ def cargar_resultado_ajax(request):
     data = models.CtaCteCliResu.search(clienteId, datetime.now(), 0)
     context = {'dataset': data}
     return render(request, 'ctactecliresu/include/cargar_resultado.html', context)
+
+
+def info(request, filter):
+    from django.urls import reverse
+    return reverse('accion:deuda/'+str(filter))
+
+
+"""
+# from django.apps import apps
+
+from mainapp.models import mainappmodel
+def currentappview(request):
+    all = mainappmodel.objects.all()
+    return render(request, "pages/home.html", {'all': all})
+"""
