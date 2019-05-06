@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 
-from . import models
+from apps.ctactecli import models
 
 
 def index(request):
