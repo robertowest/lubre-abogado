@@ -1,0 +1,4 @@
+<option value="">---------------------</option>
+{% for cliente in clientes %}
+    <option value="{{ cliente.clientes.idcliente }}">{{ cliente.clientes.nombre }}</option>
+{% endfor %}

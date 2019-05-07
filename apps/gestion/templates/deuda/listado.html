@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
-{% block title %}Seguimiento{% endblock %}
+{% block title %}Deuda{% endblock %}
 
 {% block css %}
     <style>
@@ -11,34 +12,32 @@
 {% endblock css %}
 
 {% block content %}
+    <!-- <div class="container"></div> -->
     <div class="row" style="margin-left: 10px; margin-right: 10px;">
         <div class="col col-sm-12 col-md-9 col-lg-10">
             <table class="table" id="tableResult">
                 <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Comprobante</th>
-                        <th>Importe</th>
-                        <th>Saldo</th>
-                        <th>Días</th>
-                    </tr>
+                    <th>Cliente</th>
+                    <th style="text-align: center">Asiento</th>
+                    <th style="text-align: right">Total</th>
+                    <th style="text-align: center">Días</th>
                 </thead>
-                <tbody name="dataset">
-                    {% include 'ctactecliresu/include/cargar_resultado.html' %}
+                <tbody>
+                    {% include 'deuda/include/cargar_resultado.html' %}
                 </tbody>
             </table>
+            <div id="cargando" align="center"></div>
         </div>
         <div class="col col-sm-12 col-md-3 col-lg-2" style="padding: 10px; background-color: #e9ecef;">
-            {% include 'ctactecliresu/formulario.html' %}
+            {% include 'deuda/formulario.html' %}
         </div>
     </div>
-    <hr>
 {% endblock content %}
 
 {% block js %}
 <script>
     $(document).ready(function() {
-        let urlPath = '{% url 'ctactecli:cargar_vendedores_ajax' %}';
+        let urlPath = '{% url 'gestion:cargar_vendedores_ajax' %}';
 
         $.ajax({
             url: urlPath,
@@ -53,7 +52,7 @@
     });
 
     $('#vendedorSelect').change(function() {
-        let urlPath = '{% url 'ctactecli:cargar_clientes_ajax' %}';
+        let urlPath = '{% url 'gestion:cargar_clientes_ajax' %}';
         let ufId = $(this).val();
 
         $.ajax({
@@ -70,14 +69,18 @@
     });
 
     $(document).on('click', '.result', function(event) {
-        let urlPath = '{% url 'ctactecli:cargar_resultado_ajax' %}';
-        let ufId = $('#clienteSelect').val();
+        let urlPath = '{% url 'gestion:cargar_resultado_ajax' %}';
+        let venId = $('#vendedorSelect').val();
+        let cliId = $('#clienteSelect').val();
+
+        $("#tableResult tbody").empty();
+        $('#cargando').text('Cargando datos ...');
 
         $.ajax({
             url: urlPath,
-            data: {uf: ufId},
+            data: {ven: venId, cli: cliId},
             success: function(response) {
-                $("#tableResult tbody").empty();
+                $('#cargando').empty();
                 $('#tableResult tbody').append(response);
             },
             error: function(xhr, status, error) {

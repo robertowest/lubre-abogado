@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+from apps.ctactecli.models.ctactecli import CtaCteCliResu
 
 class Accion(models.Model):
     fecha = models.DateField()
@@ -9,9 +10,10 @@ class Accion(models.Model):
     tipo = models.CharField(max_length=5, choices=TIPO, default='001')
     observacion = models.TextField()
     idenc_mov = models.IntegerField(null=True, blank=True)      # ctactecliresu.idenc_mov
-    
+    # idenc_mov = models.ForeignKey(CtaCteCliResu, on_delete=models.CASCADE, db_column='idenc_mov')
+
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse('ctactecli:accion_listado', args=(self.idenc_mov,))

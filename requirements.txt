@@ -4,3 +4,5 @@ django-firebird
 fdb
 django-filter
 django-widget-tweaks
+
+# django-database-view

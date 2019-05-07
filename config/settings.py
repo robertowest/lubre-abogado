@@ -101,7 +101,9 @@ DATABASES = {
 }
 
 # DATABASE_ROUTERS = ['app.settings.DbRouter']
-DATABASE_ROUTERS = ['config.routers.DefaultRouter', 'config.routers.CtactecliRouter']
+DATABASE_ROUTERS = ['config.routers.DefaultRouter',
+                    'config.routers.CtactecliRouter',
+                    'config.routers.GestionRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -170,7 +172,8 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "static/sent_emails")
 
 INSTALLED_APPS += [
-    'apps.ctactecli',
+    # 'apps.ctactecli',
+    'apps.gestion',
 ]
 
 

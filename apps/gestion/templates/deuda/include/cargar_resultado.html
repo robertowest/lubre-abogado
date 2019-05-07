@@ -1,0 +1,12 @@
+{% load humanize %}
+
+{% for object in dataset %}
+<tr>
+    <td>{{object.cliente.fantasia}}</td>
+    <td style="text-align: center">{{object.idenc_mov}}</td>
+    <td style="text-align: right">{{object.total|intcomma}}</td>
+    <td style="text-align: center">{{object.dias}} ({{object.meses}} meses)</td>
+</tr>
+{% endfor %}
+
+

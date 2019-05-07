@@ -4,7 +4,7 @@
 <tr>
     <td>{{object.Fecha|date:'d/m/Y'}}</td>
     <td>
-        <a href="{% url 'ctactecli:info' object.idenc_mov %}">
+        <a href="{% url 'ctactecli:accion_listado' object.idenc_mov %}">
             {{object.TipoComprob}} {{object.Letra}} {{object.Terminal|stringformat:"04d"}}-{{object.Numero|stringformat:"08d"}}</td>
         </a>
     <td>{{object.Importe|intcomma}}</td>

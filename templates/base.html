@@ -32,7 +32,9 @@
         -->
     </head>
     <body>
-        {% include "layout/navbar-empty.html" %}
+        {% block navbar %}
+            {% include "layout/navbar-empty.html" %}
+        {% endblock %}
 
         <!-- contenido -->
         <main role="main">

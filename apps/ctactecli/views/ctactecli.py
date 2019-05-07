@@ -32,8 +32,6 @@ def cargar_resultado_ajax(request):
     return render(request, 'ctactecliresu/include/cargar_resultado.html', context)
 
 
-"""
 def info(request, filter):
     from django.urls import reverse
     return reverse('ctactecli:accion_deuda/'+str(filter))
-"""

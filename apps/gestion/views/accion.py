@@ -2,14 +2,14 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from . import forms
-from . import models
+from apps.gestion import forms
+from apps.gestion import models
 
 paginacion = 50
 
 
 class AccionListView(ListView):
-    template_name = 'accion/listado.html'
+    template_name = 'gestion/listado.html'
 
     def get_queryset(self):
         return models.Accion.objects.filter(idenc_mov=self.kwargs['filter']).order_by('fecha')
@@ -26,7 +26,7 @@ class AccionDetailView(DetailView):
 
 class AccionNewView(CreateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
     def get_initial(self):
@@ -35,7 +35,7 @@ class AccionNewView(CreateView):
 
 class AccionUpdateView(UpdateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
     def get_context_data(self, **kwargs):
@@ -51,7 +51,7 @@ class AccionDeleteView(DeleteView):
 """
 class AccionListView(ListView):
     model = forms.Accion
-    template_name = 'accion/listado.html'
+    template_name = 'gestion/listado.html'
     paginate_by = paginacion
 
     def get_active(self, **kwargs):
@@ -64,13 +64,13 @@ class AccionListView(ListView):
 
 class AccionNewView(CreateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
 
 class AccionDetailView(DetailView):
     model = models.Accion
-    template_name = 'accion/info.html'
+    template_name = 'gestion/info.html'
 
     def post(self, request, *args, **kwargs):
         # comprobamos de dónde viene el post
@@ -78,24 +78,24 @@ class AccionDetailView(DetailView):
             object = self.model.objects.get(pk=self.kwargs['pk'])
             object.delete()
 
-        return redirect('accion:listado')
+        return redirect('gestion:listado')
 
 
 class AccionUpdateView(UpdateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
 
 class AccionDeleteView(DeleteView):
     model = models.Accion
-    # template_name = 'accion/confirmar_borrado.html'
-    # success_url = reverse_lazy('accion:listado')
+    # template_name = 'gestion/confirmar_borrado.html'
+    # success_url = reverse_lazy('gestion:listado')
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse_lazy('accion:listado')
+        return reverse_lazy('gestion:listado')
 """
 

@@ -7,7 +7,7 @@ paginacion = 50
 
 
 class AccionListView(ListView):
-    template_name = 'accion/listado.html'
+    template_name = 'gestion/listado.html'
 
     def get_queryset(self):
         return models.Accion.objects.filter(idenc_mov=self.kwargs['filter']).order_by('fecha')
@@ -24,7 +24,7 @@ class AccionDetailView(DetailView):
 
 class AccionNewView(CreateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
     def get_initial(self):
@@ -33,7 +33,7 @@ class AccionNewView(CreateView):
 
 class AccionUpdateView(UpdateView):
     model = models.Accion
-    template_name = 'accion/formulario.html'
+    template_name = 'gestion/formulario.html'
     form_class = forms.AccionForm
 
     def get_context_data(self, **kwargs):
