@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-# clientes = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='idcliente')
-# vendedores = models.ForeignKey(Vendedores, models.DO_NOTHING, db_column='idvendedor')
 
 class Vendedores(models.Model):
     idvendedor = models.IntegerField(primary_key=True)
@@ -11,7 +9,7 @@ class Vendedores(models.Model):
     class Meta:
         managed = False
         db_table = 'vendedor'
-        app_label = 'gestion'
+        app_label = 'firebird'
         verbose_name = 'Vendedor'
         verbose_name_plural = 'Vendedores'
 
@@ -23,7 +21,7 @@ class Actividades(models.Model):
     class Meta:
         managed = False
         db_table = 'actividades'
-        app_label = 'gestion'
+        app_label = 'firebird'
         verbose_name = 'Actividad'
         verbose_name_plural = 'Actividades'
 
@@ -35,7 +33,7 @@ class Califica(models.Model):
     class Meta:
         managed = False
         db_table = 'califica'
-        app_label = 'gestion'
+        app_label = 'firebird'
 
 
 class Estadocliente(models.Model):
@@ -48,7 +46,7 @@ class Estadocliente(models.Model):
     class Meta:
         managed = False
         db_table = 'estadocliente'
-        app_label = 'gestion'
+        app_label = 'firebird'
 
 
 class Clientes(models.Model):
@@ -69,7 +67,7 @@ class Clientes(models.Model):
     class Meta:
         managed = False
         db_table = 'clientes'
-        app_label = 'gestion'
+        app_label = 'firebird'
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
 
@@ -90,7 +88,7 @@ class CuentaCte(models.Model):
     class Meta:
         managed = False
         db_table = 'cuentacte'
-        app_label = 'gestion'
+        app_label = 'firebird'
 
 
 class ClientesSucursal(models.Model):
@@ -111,6 +109,7 @@ class ClientesSucursal(models.Model):
 class DeudaView(models.Model):
     vendedor = models.ForeignKey(Vendedores, models.DO_NOTHING, db_column='idvendedor')
     cliente = models.ForeignKey(Clientes, models.DO_NOTHING, db_column='idcliente')
+    comprobante = models.CharField(max_length=20, blank=True, null=True)
     idenc_mov = models.IntegerField(primary_key=True)
     total = models.FloatField(blank=True, null=True)
     meses = models.IntegerField(blank=True, null=True)
@@ -120,6 +119,6 @@ class DeudaView(models.Model):
         default_permissions = ('view')
         managed = False
         db_table = 'deuda_cliente_vendedor_v'
-        app_label = 'gestion'
+        app_label = 'firebird'
         verbose_name = 'Deuda'
         verbose_name_plural = 'Deudas'

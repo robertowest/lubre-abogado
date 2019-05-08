@@ -1,15 +1,30 @@
 from datetime import datetime
-
 from django.shortcuts import render
+from django.urls import reverse
 
-from apps.gestion import models
+from apps.gestion.models import firebird as models
+
 
 def index(request):
     context = {}
-    # data = models.DeudaView.objects.filter(cliente=1059)
-    data = {}
-    context = {'object_list': data}
+    context = {}
+    # context['dataset'] = models.DeudaView.objects.filter(idenc_mov=filter)
     return render(request, 'deuda/listado.html', context)
+
+
+# TODO: fusionar con index (index2 debe desaparecer)
+def index2(request, filter):
+    # import pdb; pdb.set_trace()
+    import json
+    data = models.DeudaView.objects.filter(idenc_mov=filter)
+    context = {}
+    context['dataset'] = data
+    context['json_data'] = json.dumps({
+        'vendedor':data[0].vendedor.idvendedor, 
+        'cliente':data[0].cliente.idcliente
+    })
+    return render(request, 'deuda/listado2.html', context)
+
 
 def cargar_vendedores_ajax(request):
     data = models.Vendedores.objects.using('firebird').all().order_by('nombre')
@@ -37,8 +52,3 @@ def cargar_resultado_ajax(request):
 
     context = {'dataset': data}
     return render(request, 'deuda/include/cargar_resultado.html', context)
-
-
-def info(request, filter):
-    from django.urls import reverse
-    return reverse('gestion:accion_deuda/'+str(filter))

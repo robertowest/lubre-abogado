@@ -1,6 +1,6 @@
 class DefaultRouter(object):
     def db_for_read(self, model, **hints):
-        if model._meta.app_label == 'gestion':
+        if model._meta.app_label == 'firebird':
             return 'firebird'
         return 'default'
 
@@ -22,7 +22,7 @@ class CtactecliRouter(object):
         """
         Attempts to read historic models go to firebird.
         """
-        if model._meta.app_label == 'gestion':
+        if model._meta.app_label == 'firebird':
             return 'firebird'
         return None
 
@@ -30,7 +30,7 @@ class CtactecliRouter(object):
         """
         Attempts to write historic models go to firebird.
         """
-        if model._meta.app_label == 'gestion':
+        if model._meta.app_label == 'firebird':
             return 'firebird'
         return None
 
@@ -38,8 +38,8 @@ class CtactecliRouter(object):
         """
         Allow relations if a model in the historic app is involved.
         """
-        if obj1._meta.app_label == 'gestion' or \
-            obj2._meta.app_label == 'gestion':
+        if obj1._meta.app_label == 'firebird' or \
+            obj2._meta.app_label == 'firebird':
             return True
         return None
 
@@ -47,7 +47,7 @@ class CtactecliRouter(object):
         """
         Make sure the historic app only appears in the 'firebird' database.
         """
-        if app_label == 'gestion':
+        if app_label == 'firebird':
             return db == 'firebird'
         return None
 
@@ -60,7 +60,7 @@ class GestionRouter(object):
         """
         Attempts to read historic models go to firebird.
         """
-        if model._meta.app_label == 'gestion':
+        if model._meta.app_label == 'firebird':
             return 'firebird'
         return None
 
@@ -68,7 +68,7 @@ class GestionRouter(object):
         """
         Attempts to write historic models go to firebird.
         """
-        if model._meta.app_label == 'gestion':
+        if model._meta.app_label == 'firebird':
             return 'firebird'
         return None
 
@@ -76,8 +76,8 @@ class GestionRouter(object):
         """
         Allow relations if a model in the historic app is involved.
         """
-        if obj1._meta.app_label == 'gestion' or \
-            obj2._meta.app_label == 'gestion':
+        if obj1._meta.app_label == 'firebird' or \
+            obj2._meta.app_label == 'firebird':
             return True
         return None
 
@@ -85,6 +85,6 @@ class GestionRouter(object):
         """
         Make sure the historic app only appears in the 'firebird' database.
         """
-        if app_label == 'gestion':
+        if app_label == 'firebird':
             return db == 'firebird'
         return None

@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from apps.ctactecli.models.ctactecli import CtaCteCliResu
 
 class Accion(models.Model):
     fecha = models.DateField()
@@ -16,13 +15,13 @@ class Accion(models.Model):
         return str(self.id)
 
     def get_absolute_url(self):
-        return reverse('ctactecli:accion_listado', args=(self.idenc_mov,))
+        return reverse('gestion:accion_listado', args=(self.idenc_mov,))
 
     def get_update_url(self):
-        return reverse('ctactecli:accion_modif', args=(self.idenc_mov, self.pk,))
+        return reverse('gestion:accion_modif', args=(self.idenc_mov, self.pk,))
 
     def get_delete_url(self):
-        return reverse('ctactecli:accion_borrar', args=(self.idenc_mov, self.pk,))
+        return reverse('gestion:accion_borrar', args=(self.idenc_mov, self.pk,))
 
     class Meta:
         verbose_name = 'Accion'
