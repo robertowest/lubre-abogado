@@ -7,23 +7,20 @@ from apps.gestion.models import firebird as models
 
 def index(request):
     context = {}
-    context = {}
-    # context['dataset'] = models.DeudaView.objects.filter(idenc_mov=filter)
     return render(request, 'deuda/listado.html', context)
 
 
-# TODO: fusionar con index (index2 debe desaparecer)
-def index2(request, filter):
+def cargar_datos(request, filter):
     # import pdb; pdb.set_trace()
     import json
     data = models.DeudaView.objects.filter(idenc_mov=filter)
     context = {}
     context['dataset'] = data
     context['json_data'] = json.dumps({
-        'vendedor':data[0].vendedor.idvendedor, 
+        'vendedor':data[0].vendedor.idvendedor,
         'cliente':data[0].cliente.idcliente
     })
-    return render(request, 'deuda/listado2.html', context)
+    return render(request, 'deuda/listado.html', context)
 
 
 def cargar_vendedores_ajax(request):
@@ -46,9 +43,9 @@ def cargar_resultado_ajax(request):
     data = {}
 
     if clienteId:
-        data = models.DeudaView.objects.filter(vendedor=vendedorId, cliente=clienteId)
+        data = models.DeudaView.objects.filter(vendedor=vendedorId, cliente=clienteId).order_by('-dias')
     elif vendedorId:
-        data = models.DeudaView.objects.filter(vendedor=vendedorId)
+        data = models.DeudaView.objects.filter(vendedor=vendedorId).order_by('-dias')
 
     context = {'dataset': data}
     return render(request, 'deuda/include/cargar_resultado.html', context)

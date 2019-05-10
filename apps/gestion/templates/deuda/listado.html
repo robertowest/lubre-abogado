@@ -12,6 +12,8 @@
 {% endblock css %}
 
 {% block content %}
+    {{mydata}}
+
     <!-- <div class="container"></div> -->
     <div class="row" style="margin-left: 10px; margin-right: 10px;">
         <div class="col col-sm-12 col-md-9 col-lg-10">
@@ -21,6 +23,7 @@
                     <th style="text-align: center">Comprobante</th>
                     <th style="text-align: right">Total</th>
                     <th style="text-align: center">Días</th>
+                <th style="text-align: center">Meses</th>
                 </thead>
                 <tbody>
                     {% include 'deuda/include/cargar_resultado.html' %}
@@ -37,39 +40,59 @@
 {% block js %}
 <script>
     $(document).ready(function() {
+        var mydataString = "{{json_data|escapejs}}";
+        var venId
+        var cliId
+
+        if(mydataString != '') {
+            venId = JSON.parse(mydataString)['vendedor'];
+            cliId = JSON.parse(mydataString)['cliente'];
+        }
+
+        cargar_vendedores(venId);
+        if (venId != null) {
+            cargar_clientes(venId, cliId);
+        }
+    });
+
+    function cargar_vendedores(venId) {
         let urlPath = '{% url 'gestion:cargar_vendedores_ajax' %}';
 
         $.ajax({
             url: urlPath,
             success: function(response) {
                 $('#vendedorSelect').html(response);
+                if (venId != null) {
+                    $("#vendedorSelect").val(venId);
+                }
             },
             error: function(xhr, status, error) {
                 alert(xhr.responseText);
             }
         });
-        event.preventDefault();
-    });
+    }
 
     $('#vendedorSelect').change(function() {
         let ufId = $(this).val();
         cargar_clientes(ufId);
     });
 
-    function cargar_clientes(ufId) {
+    function cargar_clientes(venId, cliId) {
         let urlPath = '{% url 'gestion:cargar_clientes_ajax' %}';
 
         $.ajax({
             url: urlPath,
-            data: {uf: ufId},
+            data: {uf: venId},
             success: function(response) {
                 $('#clienteSelect').html(response);
+                if (cliId != null) {
+                    $("#clienteSelect").val(cliId);
+                }                
             },
             error: function(xhr, status, error) {
                 alert(xhr.responseText);
             }
         })
-        event.preventDefault();
     }
 
     $(document).on('click', '.result', function(event) {
@@ -99,7 +122,6 @@
                 alert(xhr.responseText);
             }
         });
-        event.preventDefault();
     }
 </script>
 {% endblock js %}

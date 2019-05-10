@@ -24,7 +24,18 @@ class AccionListView(ListView):
 
 
 class AccionDetailView(DetailView):
-    pass
+    """
+    model = models.Accion
+    template_name = 'gestion/info.html'
+
+    def post(self, request, *args, **kwargs):
+        # comprobamos de dónde viene el post
+        if request.path.find('info'):
+            object = self.model.objects.get(pk=self.kwargs['pk'])
+            object.delete()
+
+        return redirect('gestion:listado')
+    """
 
 
 class AccionNewView(CreateView):
@@ -48,4 +59,8 @@ class AccionUpdateView(UpdateView):
 
 
 class AccionDeleteView(DeleteView):
-    pass
+    model = models.Accion
+    template_name = 'accion/confirmar_borrado.html'
+
+    def get_success_url(self):
+        return reverse_lazy('gestion:accion_listado', kwargs={'filter': self.kwargs['filter']})
