@@ -1,6 +1,5 @@
 {% load static %}
 
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -38,6 +37,8 @@
 
         <!-- contenido -->
         <main role="main">
+            {% include "bsmodals/alert.html" %}
+
             {% block content %}
             {% endblock %}
         </main>

@@ -55,8 +55,8 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        # 'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -195,3 +195,6 @@ if DEBUG:
 # crispy_forms
 INSTALLED_APPS += ['crispy_forms',]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# boostrap modal
+INSTALLED_APPS += ['bsmodals',]

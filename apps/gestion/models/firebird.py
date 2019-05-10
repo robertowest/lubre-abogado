@@ -112,7 +112,8 @@ class DeudaView(models.Model):
     comprobante = models.CharField(max_length=20, blank=True, null=True)
     idenc_mov = models.IntegerField(primary_key=True)
     total = models.FloatField(blank=True, null=True)
-    meses = models.IntegerField(blank=True, null=True)
+    fecha = models.DateField(blank=True, null=True)
+    vence = models.DateField(blank=True, null=True)
     dias = models.IntegerField(blank=True, null=True)
 
     class Meta:

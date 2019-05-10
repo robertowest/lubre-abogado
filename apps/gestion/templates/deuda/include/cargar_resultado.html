@@ -8,9 +8,9 @@
             {{object.comprobante}}
         </a>
     </td>
+    <td style="text-align: center">{{object.fecha|date:'d M Y'}}</td>
     <td style="text-align: right">{{object.total|intcomma}}</td>
-    <td style="text-align: center">{{object.dias}}</td>
-    <td style="text-align: center">{{object.meses}}</td>
+    <td style="text-align: center">{{object.dias}} días</td>
 </tr>
 {% endfor %}
 
