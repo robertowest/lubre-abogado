@@ -23,6 +23,9 @@ class Accion(models.Model):
     def get_delete_url(self):
         return reverse('gestion:accion_borrar', args=(self.idenc_mov, self.pk,))
 
+    def get_eliminar_url(self):
+        return reverse('gestion:accion_eliminar', args=(self.idenc_mov, self.pk,))
+
     class Meta:
         verbose_name = 'Accion'
         verbose_name_plural = 'Acciones'

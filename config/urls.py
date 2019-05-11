@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
-from . import views
+from apps.homepage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,11 +19,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
 
     # aplicaciones
-    # path('', views.home, name='home'),
-    # path('ctactecli/', include('apps.ctactecli.urls')),
-    # path('', include('apps.ctactecli.urls')),
-
-    path('', include('apps.gestion.urls')),
+    path('', views.home, name='home'),
+    path('clientecta/', include('apps.gestion.urls')),
 ]
 
 

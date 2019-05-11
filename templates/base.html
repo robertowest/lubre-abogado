@@ -1,5 +1,7 @@
-{% load static %}
+{# load static #}
+{% load static from staticfiles %}
 
+<!doctype html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -37,8 +39,6 @@
 
         <!-- contenido -->
         <main role="main">
-            {% include "bsmodals/alert.html" %}
-
             {% block content %}
             {% endblock %}
         </main>
@@ -47,8 +47,9 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
         <script src="{% static 'js/popper.min.js' %}"></script>
-        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'bootstrap4/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'dataTables/jquery.dataTables.min.js' %}"></script>
+        <script src="/static/bsmodals/bsmodals.js"></script>
 
         {% block js %}
         {% endblock js %}

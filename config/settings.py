@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'firebird': {
+    'firebird.pro': {
         'ENGINE': 'django.db.backends.firebird',
         'NAME': 'P:\PROYECTO\datos\Gestion.fdb',
         'USER': 'SYSDBA',
@@ -89,7 +89,7 @@ DATABASES = {
         'PORT': '3050',
         'OPTIONS': {'charset': 'ISO8859_1'}
     },
-    'firebird-rw': {
+    'firebird': {
         'ENGINE': 'django.db.backends.firebird',
         'NAME': '/databases/gestion.fdb',
         'USER': 'SYSDBA',
@@ -172,6 +172,7 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "static/sent_emails")
 
 INSTALLED_APPS += [
+    'apps.homepage',
     'apps.gestion',
 ]
 

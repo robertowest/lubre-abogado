@@ -1,0 +1,51 @@
+{% extends "basehome.html" %}
+{% block content %}
+<h1>Test Bootstrap Modals</h1>
+<div class="row align-self-center">
+    <div class="col">
+        <button id="do-alert" type="button" class="btn btn-primary">Alert</button>
+        <button id="do-error" type="button" class="btn btn-primary">Error</button>
+        <!--
+        <button id="do-confirm" type="button" class="btn btn-primary">Confirm</button>
+        -->
+        <button id="do-mydialog" type="button" class="btn btn-primary">My Dialog</button>
+
+        <button id="do-confirm" type="button" class="btn btn-danger">Eliminar</button>
+    </div>
+</div>
+{% include "mybsmodals/alert.html" %}
+{% include "mybsmodals/error.html" %}
+{% include "mybsmodals/confirm.html" %}
+{% include "mydialog.html" with bsmodals_dialog_id="mydialog"%}
+{% endblock content %}
+{% block body_script %}
+<script>
+    $(document).ready(function() {
+      $('#do-alert').click( function() {
+          bsmodals_alert('Alert Title', 'This is an alert');
+      });
+
+      $('#do-error').click( function() {
+          bsmodals_error('This is an error');
+      });
+
+      $('#do-confirm').click( function() {
+          bsmodals_confirm('¿Desea elimina el registro?', 'Seleccione Sí o No', function(result) {
+          if( result ) {
+            console.debug('Usted eligió Sí');
+          }
+          else {
+            console.debug('Usted eligió No');
+          }
+        });
+      });
+
+      $('#do-mydialog').click( function() {
+          bsmodals_dialog('mydialog',
+          [['#mydialog-title', 'My Dialog Title'], ['#message', 'Foo and bar']],
+          [['#name', 'John Doe'], ['#number', 'val3']],
+        );
+      });
+    });
+</script>
+{% endblock body_script %}

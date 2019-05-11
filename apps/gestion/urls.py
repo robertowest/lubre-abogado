@@ -26,4 +26,6 @@ urlpatterns += [
     path('clientecta/accion/<int:filter>/info/<int:pk>/', accion.AccionDetailView.as_view(), name='accion_info'),
     path('clientecta/accion/<int:filter>/modif/<int:pk>/', accion.AccionUpdateView.as_view(), name='accion_modif'),
     path('clientecta/accion/<int:filter>/borrar/<int:pk>/', accion.AccionDeleteView.as_view(), name='accion_borrar'),
+
+    path('clientecta/accion/<int:filter>/eliminar/<int:pk>/', accion.AccionEliminarView.as_view(), name='accion_eliminar'),
 ]

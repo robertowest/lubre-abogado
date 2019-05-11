@@ -64,3 +64,13 @@ class AccionDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('gestion:accion_listado', kwargs={'filter': self.kwargs['filter']})
+
+
+class AccionEliminarView(DeleteView):
+    model = models.Accion
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('gestion:accion_listado', kwargs={'filter': self.kwargs['filter']})
