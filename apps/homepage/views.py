@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 
 
 def home(request):
-    return render(request, 'homepage.html', {})
+    return render(request, 'pages/home.html', {})
 
 
 def register(request):

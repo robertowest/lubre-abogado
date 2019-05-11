@@ -11,6 +11,10 @@
     .jumbotron {padding: 2rem 2rem;}
 {% endblock css %}
 
+{% block navbar %}
+    {% include "pages/navbar.html" %}
+{% endblock %}
+
 {% block content %}
     {% if not user.is_authenticated %}
         <div class="jumbotron">

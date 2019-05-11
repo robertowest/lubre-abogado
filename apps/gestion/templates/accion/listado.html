@@ -69,16 +69,11 @@
                             <td>{{object.get_tipo_display}}</td>
                             <td>{{object.observacion}}</td>
                             <td>
-                                <a href="{{object.get_update_url}}" class="text-primary">
+                                <a href="{% url 'gestion:accion_modif' filter object.id %}" class="text-primary">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 &nbsp;
-                                <a href="{{object.get_delete_url}}" class="text-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
-
-                                -
-                                <a id="do-confirm" href="#" class="text-danger" data-url="{{object.get_eliminar_url}}">
+                                <a href="{% url 'gestion:accion_borrar' filter object.id %}" class="text-danger">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>
@@ -100,33 +95,8 @@
                 <button type="button" class="btn btn-dark pull-right">
                 <span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Regresar
                 </button>
-            </div>            
+            </div>
         </div>
         {% endcomment %}
     </div>
-
-    {% include "mybsmodals/confirm.html" %}
 {% endblock content %}
-
-
-{% block js %}
-<script>
-    $(document).ready(function() {
-
-    $('#do-confirm').click(function() {
-        var url = $("#do-confirm").attr("data-url");
-
-        bsmodals_confirm('Eliminación', '¿Confirma eliminación del registro?', function(result) {
-            if( result ) {
-                // console.debug('Usted eligió Sí');
-                document.location.href = url;
-            }
-            else {
-                console.debug('Usted eligió No');
-            }
-        });
-    });
-
-    });
-</script>
-{% endblock js %}
