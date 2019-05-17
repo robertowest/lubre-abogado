@@ -1,0 +1,43 @@
+Conexión con Firebird (en producción lo hice todo con usuario root)
+
+Instalamos fdb y django-firebird
+
+pip3 install fdb
+pip3 install django-firebird
+
+
+Después actualizamos los driver 
+
+cd /tmp
+git clone git://github.com/maxirobaina/django-firebird.git
+cd django-firebird
+python3 setup.py install 
+
+esto instalará todo en (dependiendo de la versión de python):
+
+/usr/local/lib/python3.5/dist-packages/django_firebird-2.0a0-py3.5.egg
+/usr/local/lib/python3.5/dist-packages/django_firebird-2.0a0-py3.5.egg/firebird
+
+ahora creamos un enlace a nuestra carpeta firebird 
+
+cd /usr/local/lib/python3.5/dist-packages/django/db/backends
+ln -s /usr/local/lib/python3.5/dist-packages/django_firebird-2.0a0-py3.5.egg/firebird
+
+con esto ya tendremos nuestro backend, ahora realizamos las siguientes modificaciones que me dieron error:
+
+modificar el archivo introspection.py
+
+nano /usr/local/lib/python3.5/dist-packages/django/db/backends/firebird/introspection.py
+
+Comentamos la línea 6
+# from django.utils.deprecation import RemovedInDjango21Warning
+
+Reemplazamos la línea 154
+       warnings.warn(
+            "get_indexes() is deprecated in favor of get_constraints().",
+            RemovedInDjango21Warning, stacklevel=2
+        )
+
+por esta
+        warnings.warn("get_indexes() is deprecated in favor of get_constraints().") 
+
