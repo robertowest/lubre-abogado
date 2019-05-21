@@ -1,21 +1,36 @@
+{% extends 'base.html' %}
 {% load googlecharts %}
-{# container #}
-<div id="out"></div>
-{% googlecharts %}
-	{# named data and options can be reused #}
-	{% data values "out_data" %}
-		{% col "string" "Name" %}"{{ val }}"{% endcol %}
-		{% col "number" "Value" %}{{ val }}{% endcol %}
-	{% enddata %}
-	{# you can also use global javascript variables here, #}
-	{# and call functions #}
-	{% options "out_options" %}
-		kind: "PieChart",
-		options: {
-			width: 300,
-			height: 240
-		}
-	{% endoptions %}
-	{# chart is assembled from container, data and options #}
-	{% graph "out" "out_data" "out_options" %}
-{% endgooglecharts %}
+
+{% block title %}Gráfico{% endblock %}
+
+
+{% block css %}
+    <style>
+        body {padding-top: 5rem;}
+        .jumbotron {padding: 2rem 2rem;}
+    </style>
+{% endblock %}
+
+{% block content %}
+	<h1>Total Deuda 2019: $ 6.723.561</h1>
+	<div id="out"></div>
+	{% googlecharts %}
+		{# named data and options can be reused #}
+		{% data values "out_data" %}
+			{% col "string" "Name" %}"{{ val }}"{% endcol %}
+			{% col "number" "Value" %}{{ val }}{% endcol %}
+		{% enddata %}
+
+		{# you can also use global javascript variables here, #}
+		{# and call functions #}
+		{% options "out_options" %}
+			kind: "PieChart",
+			options: {
+				width: 600,
+				height: 440
+			}
+		{% endoptions %}
+		{# chart is assembled from container, data and options #}
+		{% graph "out" "out_data" "out_options" %}
+	{% endgooglecharts %}
+{% endblock content %}

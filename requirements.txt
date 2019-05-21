@@ -4,6 +4,9 @@ django-crispy-forms
 django-firebird
 fdb
 django-filter
+django-qsstats-magic
+python-dateutil
+django-google-charts
 django-widget-tweaks
 
 # django-database-view

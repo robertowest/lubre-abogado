@@ -5,8 +5,26 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 
 
+def chrats(request):
+    return render(request, 'graficos.html', {})
+
 def home(request):
-    return render(request, 'pages/home.html', {})
+    # return render(request, 'pages/home.html', {})
+    valores = [['Menos de 15 días', 3251593],
+               ['15 días', 1642800],
+               ['30 días', 825764],
+               ['45 días', 471582],
+               ['60 días', 88626],
+               ['75 días', 80562],
+               ['90 días', 62976],
+               ['105 días', 120651],
+               ['120 días', 179000],
+               ['135 días', 1],
+    ]
+
+    context = {'values': valores}
+    template = 'charts.html'
+    return render(request, template, context)
 
 
 def register(request):

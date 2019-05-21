@@ -1,18 +1,27 @@
-CREATE OR ALTER VIEW DEUDA_CLIENTE_VENDEDOR_V (IDVENDEDOR, IDCLIENTE, IDENC_MOV, TOTAL, COMPROBANTE, FECHA, VENCE, DIAS)
-AS
-select cs.idvendedor,
-	   result.idcliente, result.idenc_mov, result.total,
-	   rpad(cc.tipocomprob, 4, ' ') || rpad(cc.letra, 2, ' ') || lpad(cc.terminal, 4, '0') || '-' || lpad(cc.numero, 8, '0') comprobante,
-	   cc.fecha, cc.fecha + pv.diascob1 vence,
-       datediff(day, cc.fecha + pv.diascob1, current_date) dias
-from
+CREATE OR ALTER VIEW deuda_cliente_vendedor_v AS
+SELECT CS.IDVENDEDOR,
+	   RESULT.IDCLIENTE, RESULT.IDENC_MOV, RESULT.TOTAL,
+	   RPAD(CC.TIPOCOMPROB, 4, ' ') || RPAD(CC.LETRA, 2, ' ') || LPAD(CC.TERMINAL, 4, '0') || '-' || LPAD(CC.NUMERO, 8, '0') COMPROBANTE,
+	   CC.FECHA, CC.FECHA + PV.DIASCOB1 VENCE,
+       DATEDIFF(DAY, CC.FECHA + PV.DIASCOB1, CURRENT_DATE) DIAS
+FROM 
 (
-  select idcliente, ref_idenc_mov as idenc_mov, sum(importe) total
-  from cuentacte
-  group by idcliente, ref_idenc_mov
-  having sum(importe) > 0
-) result
-inner join cuentacte cc on cc.idenc_mov = result.idenc_mov
-inner join clientessucursal cs on cs.idcliente = cc.idcliente
-inner join ptovta pv on pv.ptovta = cc.terminal
-where datediff(day, cc.vence, current_date) > 0
+  SELECT IDCLIENTE, REF_IDENC_MOV AS IDENC_MOV, SUM(IMPORTE) TOTAL
+  FROM CUENTACTE
+  GROUP BY IDCLIENTE, REF_IDENC_MOV
+  HAVING SUM(IMPORTE) > 0
+) RESULT
+INNER JOIN CUENTACTE CC ON CC.IDENC_MOV = RESULT.IDENC_MOV
+INNER JOIN CLIENTESSUCURSAL CS ON CS.IDCLIENTE = CC.IDCLIENTE
+INNER JOIN PTOVTA PV ON PV.PTOVTA = CC.TERMINAL
+WHERE DATEDIFF(DAY, CC.FECHA + PV.DIASCOB1, CURRENT_DATE) > 0;
+
+
+/*
+-- calcula total por cada 15 días (0, 15, 20, 45 días)
+-- para realizar gráfica
+SELECT 15*(dias/15) q, ROUND(sum(total),2) suma
+FROM DEUDA_CLIENTE_VENDEDOR_V
+where ((vence > '2019-01-01') and (vence < '2019-05-21'))
+GROUP BY q
+*/

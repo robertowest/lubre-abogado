@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-    'firebird.pro': {
+    'firebird': {
         'ENGINE': 'django.db.backends.firebird',
         'NAME': 'P:\PROYECTO\datos\Gestion.fdb',
         'USER': 'SYSDBA',
@@ -89,7 +89,7 @@ DATABASES = {
         'PORT': '3050',
         'OPTIONS': {'charset': 'ISO8859_1'}
     },
-    'firebird': {
+    'firebird.rw': {
         'ENGINE': 'django.db.backends.firebird',
         'NAME': '/databases/gestion.fdb',
         'USER': 'SYSDBA',
@@ -170,6 +170,9 @@ LOGOUT_REDIRECT_URL = '/'
 # esto evitará que se envíe un email e imprimirá el resultado por la consola
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "static/sent_emails")
+
+INSTALLED_APPS += ['googlecharts',]
+
 
 INSTALLED_APPS += [
     'apps.homepage',
